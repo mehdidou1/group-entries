@@ -128,6 +128,12 @@ CoCompletionContext >> completionToken [
 ]
 
 { #category : 'accessing' }
+CoCompletionContext >> completionToken: aToken [
+
+	completionToken := aToken 
+]
+
+{ #category : 'accessing' }
 CoCompletionContext >> completionTokenStart [
 
 	^ completionTokenStart
