@@ -9,7 +9,10 @@ Group Entries is a Pharo extension that clusters raw completion entries into mea
 
 ---
 
-<img width="770" height="397" alt="group-entries" src="https://github.com/user-attachments/assets/bedd558b-8b3d-4155-b0fc-aaeefd54c692" />
+# Example:
+
+<img width="915" height="650" alt="GroupEntries" src="https://github.com/user-attachments/assets/a4bd0082-cf22-4851-bfac-216f8e042856" />
+
 
 ---
 
