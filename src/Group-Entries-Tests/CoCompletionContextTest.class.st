@@ -57,13 +57,18 @@ CoCompletionContextTest >> testBuildGroupedEntriesFromWithMixedComponents [
 
 { #category : 'testing' }
 CoCompletionContextTest >> testBuildGroupedEntriesFromWithMultipleLongEntries [
-  "With multiple entries sharing the same prefix, it should return a NECPrefixGroupEntry"
-  completionContext completionToken: 'CoASTHeuristics'.
-  items
-    add: (CoGlobalEntry new contents: 'CoASTHeuristicsResultSetBuilder'; yourself);
-    add: (CoGlobalEntry new contents: 'CoASTHeuristicsFetcher'; yourself).
-  self assert: (completionContext buildGroupedEntriesFrom: items) size equals: 1.
-  self assert: (completionContext buildGroupedEntriesFrom: items) first class equals: NECPrefixGroupEntry.
+	"With multiple entries sharing the same prefix, it should return a NECPrefixGroupEntry"
+
+	completionContext completionToken: 'CoASTHeuristics'.
+	items
+		add: (CoGlobalEntry new
+				 contents: 'CoASTHeuristicsResultSetBuilder';
+				 yourself);
+		add: (CoGlobalEntry new
+				 contents: 'CoASTHeuristicsFetcher';
+				 yourself).
+	self assert: (completionContext buildGroupedEntriesFrom: items) size equals: 1.
+	self assert: (completionContext buildGroupedEntriesFrom: items) first class equals: CoEntry
 ]
 
 { #category : 'testing' }
@@ -117,14 +122,15 @@ CoCompletionContextTest >> testLeaveGroupWhenGroupStackIsEmpty [
 
 { #category : 'testing' }
 CoCompletionContextTest >> testLeaveGroupWhenGroupStackIsNotEmpty [
+
 	| group |
-	group := NECPrefixGroupEntry new
-		children: { CoGlobalEntry new. CoSelectorEntry new }.
+	group := CoEntry new children: {
+			         CoGlobalEntry new.
+			         CoSelectorEntry new }.
 
 	completionContext openGroup: group.
 
-	self assert: (completionContext leaveGroup) equals: true.
-		
+	self assert: completionContext leaveGroup equals: true
 ]
 
 { #category : 'testing' }
@@ -135,12 +141,17 @@ CoCompletionContextTest >> testTitleWhenGroupStackIsEmpty [
 
 { #category : 'testing' }
 CoCompletionContextTest >> testTitleWhenGroupStackIsNotEmpty [
+
 	| group |
-	group := NECPrefixGroupEntry new
-		children: { CoGlobalEntry new contents: 'foo'; yourself. CoSelectorEntry new contents: 'bar'; yourself }.
+	group := CoEntry new children: {
+			         (CoGlobalEntry new
+				          contents: 'foo';
+				          yourself).
+			         (CoSelectorEntry new
+				          contents: 'bar';
+				          yourself) }.
 
 	completionContext openGroup: group.
 
-	self assert: (completionContext title) equals: ('Completions · ', 'foo')
-		
+	self assert: completionContext title equals: 'Completions · ' , 'foo'
 ]
