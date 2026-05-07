@@ -9,7 +9,7 @@ Class {
 	#package : 'Group-Entries'
 }
 
-{ #category : 'as yet unclassified' }
+{ #category : 'instance creation' }
 NECPrefixGroupEntry class >> prefix: aString children: aCollection [
 
 	^ self new
