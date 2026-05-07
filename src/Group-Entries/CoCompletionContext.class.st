@@ -68,7 +68,7 @@ CoCompletionContext >> buildGroupedEntriesFrom: aCollection [
 		bucket := buckets at: prefix.
 		bucket size = 1
 			ifTrue: [ grouped add: bucket first ]
-			ifFalse: [ grouped add: (NECPrefixGroupEntry prefix: prefix children: bucket) ] ].
+			ifFalse: [ grouped add: (CoEntry prefix: prefix children: bucket) ] ].
 
 	^ grouped
 ]
